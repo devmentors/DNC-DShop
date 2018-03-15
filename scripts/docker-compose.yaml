@@ -14,7 +14,6 @@ services:
       - rabbitmq
       - redis
       - storage-service
-      - customers-service
       - operations-service
     ports:
       - '5000:5000'
