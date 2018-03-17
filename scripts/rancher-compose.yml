@@ -1,0 +1,41 @@
+version: '2'
+services:
+  mongo:
+    scale: 1
+    start_on_create: true
+  orders-service:
+    scale: 1
+    start_on_create: true
+  storage-service:
+    scale: 1
+    start_on_create: true
+  rabbitmq:
+    scale: 1
+    start_on_create: true
+  redis:
+    scale: 1
+    start_on_create: true
+  notifications-service:
+    scale: 1
+    start_on_create: true
+  lockbox:
+    scale: 1
+    start_on_create: true
+  products-service:
+    scale: 1
+    start_on_create: true
+  operations-service:
+    scale: 1
+    start_on_create: true
+  signalr-service:
+    scale: 1
+    start_on_create: true
+  customers-service:
+    scale: 1
+    start_on_create: true
+  api:
+    scale: 1
+    start_on_create: true
+  identity-service:
+    scale: 1
+    start_on_create: true
