@@ -18,6 +18,7 @@ services:
     ports:
       - '5000:5000'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=api'
@@ -34,6 +35,7 @@ services:
     ports:
       - '5001:5001'  
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=customers-service'
@@ -50,6 +52,7 @@ services:
     ports:
       - '5002:5002'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=identity-service'
@@ -64,6 +67,7 @@ services:
     ports:
       - '5003:5003'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=notifications-service'
@@ -78,6 +82,7 @@ services:
     ports:
       - '5004:5004'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=operations-service'
@@ -94,6 +99,7 @@ services:
     ports:
       - '5005:5005'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=orders-service'
@@ -108,6 +114,7 @@ services:
     ports:
       - '5006:5006'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=products-service'
@@ -121,6 +128,7 @@ services:
     ports:
       - '5007:5007'
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=signalr-service'
@@ -140,6 +148,7 @@ services:
     ports:
       - '5008:5008'  
     environment:
+    - 'USE_LOCKBOX=false'
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:6000'
     - 'LOCKBOX_BOX_NAME=storage-service'
@@ -161,7 +170,7 @@ services:
   mongo:
     image: mongo
     volumes:
-      - ./data/db:/data/db
+      - './data/db:/data/db'
     ports:
       - '27017:27017'
 
