@@ -3,7 +3,7 @@ REPOSITORIES=(DNC-DShop.Api DNC-DShop.Common DNC-DShop.Messages DNC-DShop.Servic
 for REPOSITORY in ${REPOSITORIES[*]}
 do
 	 echo ========================================================
-	 echo Building solution: $REPOSITORY
+	 echo Building a solution: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
      git checkout develop

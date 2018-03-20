@@ -10,7 +10,7 @@ services:
     image: devmentors/dshop.services.orders:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: orders-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -31,7 +31,7 @@ services:
     image: devmentors/dshop.services.storage
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: storage-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -67,7 +67,7 @@ services:
     image: devmentors/dshop.services.notifications:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: notifications-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -83,19 +83,19 @@ services:
   lockbox:
     image: lockbox/lockbox.server
     environment:
-      ASPNETCORE_URLS: http://*:6000
+      ASPNETCORE_URLS: http://*:5050
       LOCKBOX_MONGO_CONNECTION_STRING: mongodb://mongo:27017/Lockbox
       LOCKBOX_MONGO_DATABASE: Lockbox
       LOCKBOX_SECRET_KEY: YOUR_LOCKBOX_SECRET_KEY
     links:
     - mongo:mongo
     ports:
-    - 6000:6000/tcp
+    - 5050:5050/tcp
   products-service:
     image: devmentors/dshop.services.products:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: products-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -112,7 +112,7 @@ services:
     image: devmentors/dshop.services.operations:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: operations-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -129,7 +129,7 @@ services:
     image: devmentors/dshop.services.signalr:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: signalr-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -144,7 +144,7 @@ services:
     image: devmentors/dshop.services.customers:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: customers-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -165,7 +165,7 @@ services:
     image: devmentors/dshop.api:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: api
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings
@@ -188,7 +188,7 @@ services:
     image: devmentors/dshop.services.identity:latest
     environment:
       LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:6000
+      LOCKBOX_API_URL: http://lockbox:5050
       LOCKBOX_BOX_NAME: identity-service
       LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
       LOCKBOX_ENTRY_KEY: appsettings

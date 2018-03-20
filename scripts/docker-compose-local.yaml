@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    build: ./DShop.Api/src/DShop.Api
+    build: ./DNC-DShop.Api/src/DShop.Api
     links:
       - rabbitmq
       - redis
@@ -19,17 +19,16 @@ services:
       - '5000:5000'
 
   customers-service:
-    build: ./DShop.Services.Customers/src/DShop.Services.Customers
+    build: ./DNC-DShop.Services.Customers/src/DShop.Services.Customers
     links:
       - mongo
       - rabbitmq
-      - orders-service
       - products-service
     ports:
       - '5001:5001'  
 
   identity-service:
-    build: ./DShop.Services.Identity/src/DShop.Services.Identity
+    build: ./DNC-DShop.Services.Identity/src/DShop.Services.Identity
     links:
       - mongo
       - rabbitmq
@@ -39,7 +38,7 @@ services:
       - '5002:5002'
 
   notifications-service:
-    build: ./DShop.Services.Notifications/src/DShop.Services.Notifications
+    build: ./DNC-DShop.Services.Notifications/src/DShop.Services.Notifications
     links:
       - mongo
       - rabbitmq
@@ -47,7 +46,7 @@ services:
       - '5003:5003'
 
   operations-service:
-    build: ./DShop.Services.Operations/src/DShop.Services.Operations
+    build: ./DNC-DShop.Services.Operations/src/DShop.Services.Operations
     links:
       - mongo
       - rabbitmq
@@ -55,7 +54,7 @@ services:
       - '5004:5004'
 
   orders-service:
-    build: ./DShop.Services.Orders/src/DShop.Services.Orders
+    build: ./DNC-DShop.Services.Orders/src/DShop.Services.Orders
     links:
       - mongo
       - rabbitmq
@@ -65,7 +64,7 @@ services:
       - '5005:5005'
 
   products-service:
-    build: ./DShop.Services.Products/src/DShop.Services.Products
+    build: ./DNC-DShop.Services.Products/src/DShop.Services.Products
     links:
       - mongo
       - rabbitmq
@@ -73,14 +72,14 @@ services:
       - '5006:5006'
 
   signalr-service:
-    build: ./DShop.Services.Signalr/src/DShop.Services.Signalr
+    build: ./DNC-DShop.Services.Signalr/src/DShop.Services.Signalr
     links:
       - rabbitmq
     ports:
       - '5007:5007'
 
   storage-service:
-    build: ./DShop.Services.Storage/src/DShop.Services.Storage
+    build: ./DNC-DShop.Services.Storage/src/DShop.Services.Storage
     links:
       - mongo
       - rabbitmq
