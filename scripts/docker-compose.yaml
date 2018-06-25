@@ -1,13 +1,6 @@
 version: "2"
 
 services:
-  start_dependencies:
-    image: dadarek/wait-for-dependencies
-    depends_on:
-      - mongo
-      - rabbitmq
-    command: rabbitmq:5672
-
   api:
     image: devmentors/dshop.api
     links:
@@ -18,12 +11,7 @@ services:
     ports:
       - '5000:5000'
     environment:
-    - 'USE_LOCKBOX=false'
-    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
-    - 'LOCKBOX_API_URL=http://lockbox:5050'
-    - 'LOCKBOX_BOX_NAME=api'
-    - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
-    - 'LOCKBOX_ENTRY_KEY=appsettings'
+    - 'USE_LOCKBOX=true'
 
   customers-service:
     image: devmentors/dshop.services.customers
