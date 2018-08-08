@@ -6,9 +6,6 @@ services:
   orders-service:
     scale: 1
     start_on_create: true
-  storage-service:
-    scale: 1
-    start_on_create: true
   rabbitmq:
     scale: 1
     start_on_create: true
