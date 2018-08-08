@@ -144,7 +144,6 @@ services:
       LOCKBOX_ENTRY_KEY: appsettings
       USE_LOCKBOX: 'false'
     links:
-    - operations-service:operations-service
     - rabbitmq:rabbitmq
     - redis:redis
     - customers-service:customers-service
@@ -153,7 +152,6 @@ services:
     - products-service:products-service
     - rabbitmq:rabbitmq
     - redis:redis
-    - storage-service:storage-service
     ports:
     - 5000:5000/tcp
     labels:
