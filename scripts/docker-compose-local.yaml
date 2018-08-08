@@ -13,8 +13,10 @@ services:
     links:
       - rabbitmq
       - redis
-      - storage-service
+      - customers-service
       - operations-service
+      - orders-service
+      - products-service
     ports:
       - '5000:5000'
 
@@ -77,19 +79,6 @@ services:
       - rabbitmq
     ports:
       - '5007:5007'
-
-  storage-service:
-    build: ./DNC-DShop.Services.Storage/src/DShop.Services.Storage
-    links:
-      - mongo
-      - rabbitmq
-      - redis
-      - customers-service
-      - identity-service
-      - orders-service
-      - products-service
-    ports:
-      - '5008:5008'  
 
   mongo:
     image: mongo

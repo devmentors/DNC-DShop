@@ -27,33 +27,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
       service: orders
-  storage-service:
-    image: devmentors/dshop.services.storage
-    environment:
-      LOCKBOX_API_KEY: YOUR_LOCKBOX_API_KEY
-      LOCKBOX_API_URL: http://lockbox:5050
-      LOCKBOX_BOX_NAME: storage-service
-      LOCKBOX_ENCRYPTION_KEY: YOUR_LOCKBOX_ENCRYPTION_KEY
-      LOCKBOX_ENTRY_KEY: appsettings
-      USE_LOCKBOX: 'false'
-    links:
-    - rabbitmq:rabbitmq
-    - mongo:mongo
-    - redis:redis
-    - identity-service:identity-service
-    - orders-service:orders-service
-    - customers-service:customers-service
-    - products-service:products-service
-    - rabbitmq:rabbitmq
-    - mongo:mongo
-    - redis:redis
-    - identity-service:identity-service
-    - orders-service:orders-service
-    - customers-service:customers-service
-    - products-service:products-service
-    labels:
-      io.rancher.container.pull_image: always
-      service: storage
   rabbitmq:
     image: rabbitmq:3.6.5-management
     ports:
@@ -174,8 +147,10 @@ services:
     - operations-service:operations-service
     - rabbitmq:rabbitmq
     - redis:redis
-    - storage-service:storage-service
+    - customers-service:customers-service
     - operations-service:operations-service
+    - orders-service:orders-service
+    - products-service:products-service
     - rabbitmq:rabbitmq
     - redis:redis
     - storage-service:storage-service

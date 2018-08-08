@@ -3,10 +3,9 @@ REPOSITORIES=(DNC-DShop.Api DNC-DShop.Common DNC-DShop.Messages DNC-DShop.Servic
 for REPOSITORY in ${REPOSITORIES[*]}
 do
 	 echo ========================================================
-	 echo Building a solution: $REPOSITORY
+	 echo Updating repository: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-     git checkout develop
      dotnet build
      cd ..
 done

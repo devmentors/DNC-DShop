@@ -3,7 +3,7 @@ export ASPNETCORE_ENVIRONMENT=local
 START_LOCAL=./scripts/start.sh
 PREFIX=DNC-DShop
 SERVICE=$PREFIX.Services
-REPOSITORIES=($PREFIX.Api $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr $SERVICE.Storage)
+REPOSITORIES=($PREFIX.Api $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
 
 for REPOSITORY in ${REPOSITORIES[*]}
 do

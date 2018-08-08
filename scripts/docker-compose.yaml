@@ -1,17 +1,31 @@
 version: "2"
 
 services:
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - mongo
+      - rabbitmq
+    command: rabbitmq:5672
+
   api:
     image: devmentors/dshop.api
     links:
       - rabbitmq
       - redis
-      - storage-service
+      - customers-service
       - operations-service
+      - orders-service
+      - products-service
     ports:
       - '5000:5000'
     environment:
-    - 'USE_LOCKBOX=true'
+    - 'USE_LOCKBOX=false'
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
+    - 'LOCKBOX_API_URL=http://lockbox:5050'
+    - 'LOCKBOX_BOX_NAME=api'
+    - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
+    - 'LOCKBOX_ENTRY_KEY=appsettings'
 
   customers-service:
     image: devmentors/dshop.services.customers
@@ -119,26 +133,6 @@ services:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:5050'
     - 'LOCKBOX_BOX_NAME=signalr-service'
-    - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
-    - 'LOCKBOX_ENTRY_KEY=appsettings'
-
-  storage-service:
-    image: devmentors/dshop.services.storage
-    links:
-      - mongo
-      - rabbitmq
-      - redis
-      - customers-service
-      - identity-service
-      - orders-service
-      - products-service
-    ports:
-      - '5008:5008'  
-    environment:
-    - 'USE_LOCKBOX=false'
-    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
-    - 'LOCKBOX_API_URL=http://lockbox:5050'
-    - 'LOCKBOX_BOX_NAME=storage-service'
     - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
     - 'LOCKBOX_ENTRY_KEY=appsettings'
 
