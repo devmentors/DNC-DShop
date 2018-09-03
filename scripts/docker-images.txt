@@ -1,0 +1,404 @@
+Docker images and configurations for running the following services:
+
+*** Message queue ***
+-RabbitMQ
+
+*** Database ***
+-MongoDB
+-SQL Server 2017
+-PostgreSQL
+-InfluxDB
+
+*** Cache ***
+-Redis
+
+*** Service discovery ***
+-Consul
+
+*** Secret storage ***
+-Vault
+
+*** Monitoring ***
+-Grafana
+-Prometheus
+
+*** Logging ***
+-Seq
+-Elasticsearch
+-Kibana
+-Logstash
+-Jaeger
+
+===========================================================================================================================
+*** MESSAGE QUEUE ***
+===========================================================================================================================
+
+===========================================================================================================================
+RABBITMQ
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name rabbitmq -d -p 5672:5672 -p 15672:15672 --hostname rabbitmq rabbitmq:3-management
+
+--- Optional ---
+
+-v /tmp/rabbitmq/data:/var/lib/rabbitmq 
+
+-e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=secret
+
+
+===========================================================================================================================
+*** DATABASE ***
+===========================================================================================================================
+
+===========================================================================================================================
+MONGODB
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name mongo -d -p 27017:27017 mongo:4
+
+--- Optional ---
+
+-v /tmp/mongo:/data/db
+
+
+===========================================================================================================================
+MONGO EXPRESS
+===========================================================================================================================
+
+--- Docker ---
+
+docker run  --name mongo-express -d -p 8081:8081 --link mongo:mongo mongo-express
+
+--- Optional ---
+
+-e ME_CONFIG_MONGODB_ADMINUSERNAME=user -e ME_CONFIG_MONGODB_ADMINPASSWORD=secret
+
+
+===========================================================================================================================
+SQL SERVER 2018
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name mssql -d -p 1433:1433 -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Abcd1234!' microsoft/mssql-server-linux:2017-latest
+
+--- Optional ---
+
+-v /tmp/mssql:/var/opt/mssql
+
+
+===========================================================================================================================
+POSTGRESQL
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name postgres -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=secret postgres postgres  
+
+--- Optional ---
+
+-v /tmp/postgresql:/var/lib/postgresql/data
+
+
+===========================================================================================================================
+INFLUXDB
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name influxdb -d -p 8086:8086 influxdb 
+
+--- Optional ---
+
+-v /tmp/influxdb:/var/lib/influxdb
+
+===========================================================================================================================
+*** CACHE ***
+===========================================================================================================================
+
+===========================================================================================================================
+REDIS
+===========================================================================================================================
+
+--- Docker ---
+
+docker run  --name redis -d -p 6379:6379-v /tmp/redis/:/data redis
+
+--- Optional ---
+
+-v /tmp/redis/:/data
+
+
+===========================================================================================================================
+REDIS CLI
+===========================================================================================================================
+
+--- Docker ---
+
+docker run -it --link redis:redis --rm redis redis-cli -h redis -p 6379
+
+
+
+===========================================================================================================================
+*** SERVICE DISCOVERY ***
+===========================================================================================================================
+
+===========================================================================================================================
+CONSUL
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name consul -d -p 8500:8500 consul
+
+--- Optional ---
+
+-v /tmp/consul/data:/consul/data
+
+-v /tmp/consul/config:/consul/config
+
+config.json:
+
+{
+  "datacenter": "dc1",
+  "log_level": "DEBUG",
+  "server": true,
+  "ui" : true,
+  "ports": {
+    "dns": 9600,
+    "http": 9500,
+    "https": -1,
+    "serf_lan": 9301,
+    "serf_wan": 9302,
+    "server": 9300
+  }
+}
+
+
+
+===========================================================================================================================
+*** SECRET STORAGE ***
+===========================================================================================================================
+
+===========================================================================================================================
+VAULT
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name vault -d -p 8200:8200 --cap-add=IPC_LOCK -e VAULT_ADDR='http://127.0.0.1:8200' -e 'VAULT_DEV_ROOT_TOKEN_ID=secret' vault 
+
+
+===========================================================================================================================
+VAULT SERVER
+===========================================================================================================================
+
+# This is a production ready Vault Server using Consul as its backend storage for HA purposes
+
+--- Docker ---
+
+docker run  --name vault-server -d -p 8200:8200 --cap-add=IPC_LOCK -e VAULT_ADDR='http://127.0.0.1:8200' -e 'VAULT_LOCAL_CONFIG={"backend":{"consul":{"address":"docker.for.mac.localhost:8500","advertise_addr":"http://docker.for.mac.localhost", "path":"vault/"}},"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}}, "ui":true}' vault server
+
+# Run shell on vault-server container
+
+docker exec -it vault-server sh
+
+# Init Vault
+
+vault operator init
+
+# You will see the similar output - unseal keys + root token
+
+Unseal Key 1: O+lfzkAlw2SrlAthjROuQHOcvJroGIBo+0f4lrQ15T4K
+Unseal Key 2: y33W78RBDgPekmoBJS8DecAYvS73q0hp8BoiNLVcljB9
+Unseal Key 3: 4yGX8sLtLA8/MAdsXOWDLqHY4i0aejzhTtJsarF33WIg
+Unseal Key 4: 7ZXUJJ3MuQ8ac++RFX+KuLv2jXXWfYJgLd8ZXuJeN5j4
+Unseal Key 5: D+lvvqfcPnZ7Zlr05D8B7C9hwNGpueE/vUFw36s6alTC
+
+Initial Root Token: 79b39c49-fd07-112d-7a50-ea205e7696cb
+
+# Unseal the Vault - once completed, the Consul backend should display a "green" vault service
+# Execute unseal 3 times - you will be asked for 3 different keys (1-5).
+
+vault operator unseal
+
+# Login using the root token
+
+vault login
+
+# Enable userpass authentication method (can be done also via web UI)
+
+vault auth enable userpass
+
+# Open Vault UI at: http://localhost:8200 and login using root token
+# Go to Policies -> default and copy all of its content
+# Create a new Policy e.g. "services" and paste the "default" policy content + the following settings below:
+
+path "secret/*" {
+  capabilities = ["read"]
+}
+
+# It will allow to create a new user (instead of using root token) and assign the "services" policy being able to read "secret" storage
+# Possible values: ["create", "read", "update", "delete", "list"]
+
+# Create a new account where "user" (last part of auth/ path) represents the username
+
+vault write auth/userpass/users/user password=secret policies=services
+
+# Since Vault Server uses V1 Storage by default (while dev server works with V2) we need to upgrade the storage to V2 from V1
+
+vault kv enable-versioning secret
+
+# Eventually, login again to the web UI and the Secrets -> "secret" engine should be running as "version 2".
+
+# Create a new secret by clicking "Create secret" as JSON and override there any appsettings for your application under specified path e.g. api/options
+
+# Update the "vault" section in appsettings.json file to make use of "userpass" instead of "token" or override VAULT_AUTH_TYPE, VAULT_USERNAME and VAULT_PASSWORD env variables.
+
+# Restart the app - now it will load the settings from secret Vault storage.
+
+
+
+===========================================================================================================================
+*** MONITORING ***
+===========================================================================================================================
+
+===========================================================================================================================
+GRAFANA
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name grafana -d -p 3000:3000  grafana/grafana 
+
+--- Optional ---
+
+-v /tmp/grafana:/var/lib/grafana
+
+
+===========================================================================================================================
+PROMETHEUS
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name prometheus -d -p 9090:9090 -v /tmp/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+prometheus.yml:
+
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['docker.for.mac.localhost:9090']
+
+  - job_name: 'api'
+    metrics_path: '/metrics-text'
+    static_configs:
+      - targets: ['docker.for.mac.localhost:5000']
+
+
+
+===========================================================================================================================
+*** LOGGING ***
+===========================================================================================================================
+
+===========================================================================================================================
+SEQ
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name seq -d -p 5341:80 -e ACCEPT_EULA=Y datalust/seq 
+
+--- Optional ---
+
+-v /tmp/seq:/data
+
+
+===========================================================================================================================
+ELASTICSEARCH
+===========================================================================================================================
+
+# The vm.max_map_count kernel has to be set to at least 262144 for production use.
+
+# Linux: 
+grep vm.max_map_count /etc/sysctl.conf 
+vm.max_map_count=262144
+
+# macOS: 
+screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+sysctl -w vm.max_map_count=262144
+
+# Windows
+docker-machine ssh
+sudo sysctl -w vm.max_map_count=262144
+
+--- Docker ---
+
+docker run --name elasticsearch -p 9200:9200 -p 9300:9300 docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+
+--- Optional ---
+
+-e "discovery.type=single-node"
+
+-v /tmp/elasticsearch:/usr/share/elasticsearch/data
+
+
+===========================================================================================================================
+KIBANA
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name kibana -d -p 5601:5601 docker.elastic.co/kibana/kibana:6.4.0
+
+--- Optional ---
+
+-v /tmp/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+kibana.yml:
+
+server.name: kibana
+server.host: "0"
+elasticsearch.url: http://elasticsearch:9200
+
+
+===========================================================================================================================
+LOGSTASH
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name logstash -d -p 5044:5044 docker.elastic.co/logstash/logstash:6.4.0
+
+
+===========================================================================================================================
+JAEGER
+===========================================================================================================================
+
+--- Docker ---
+
+docker run --name jaeger -d -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 -p 9411:9411 -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 jaegertracing/all-in-one
