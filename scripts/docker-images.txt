@@ -71,7 +71,7 @@ MONGO EXPRESS
 
 --- Docker ---
 
-docker run  --name mongo-express -d -p 8081:8081 --link mongo:mongo mongo-express
+docker run --name mongo-express -d -p 8081:8081 --link mongo:mongo mongo-express
 
 --- Optional ---
 
@@ -126,7 +126,7 @@ REDIS
 
 --- Docker ---
 
-docker run  --name redis -d -p 6379:6379-v /tmp/redis/:/data redis
+docker run --name redis -d -p 6379:6379 redis
 
 --- Optional ---
 
@@ -201,7 +201,7 @@ VAULT SERVER
 
 --- Docker ---
 
-docker run  --name vault-server -d -p 8200:8200 --cap-add=IPC_LOCK -e VAULT_ADDR='http://127.0.0.1:8200' -e 'VAULT_LOCAL_CONFIG={"backend":{"consul":{"address":"docker.for.mac.localhost:8500","advertise_addr":"http://docker.for.mac.localhost", "path":"vault/"}},"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}}, "ui":true}' vault server
+docker run --name vault-server -d -p 8200:8200 --cap-add=IPC_LOCK -e VAULT_ADDR='http://127.0.0.1:8200' -e 'VAULT_LOCAL_CONFIG={"backend":{"consul":{"address":"docker.for.mac.localhost:8500","advertise_addr":"http://docker.for.mac.localhost", "path":"vault/"}},"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}}, "ui":true}' vault server
 
 # Run shell on vault-server container
 
