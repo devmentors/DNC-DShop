@@ -97,7 +97,7 @@ POSTGRESQL
 
 --- Docker ---
 
-docker run --name postgres -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=secret postgres postgres  
+docker run --name postgres -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=secret postgres
 
 --- Optional ---
 
@@ -198,6 +198,7 @@ VAULT SERVER
 ===========================================================================================================================
 
 # This is a production ready Vault Server using Consul as its backend storage for HA purposes
+# Set 'address' and 'advertise_addr' fields for proper IP addresses or domains.
 
 --- Docker ---
 
@@ -273,7 +274,7 @@ GRAFANA
 
 --- Docker ---
 
-docker run --name grafana -d -p 3000:3000  grafana/grafana 
+docker run --name grafana -d -p 3000:3000 grafana/grafana 
 
 --- Optional ---
 
