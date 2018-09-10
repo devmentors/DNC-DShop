@@ -98,6 +98,9 @@ services:
     ports:
       - '6379:6379'
 ```
+
+You can also find this file [here](https://github.com/devmentors/DNC-DShop/blob/master/compose/docker-compose-infrastructure.yml), which includes custom network and volumes. In order to start it, execute `docker-compose -f docker-compose-infrastructure.yml up -d` (`-d` will run containers in the background).
+
 Once you have the core infrastructure available, you can start a particular `DNC` project either by executing `dotnet run` command in `/src/PROJECT_NAME/` directory or starting a shell script `./scripts/start.sh` from the root project directory. 
 The order of starting the services has no meaning whatsoever - just keep in mind that `DShop.Api` acts as a [gateway](https://microservices.io/patterns/apigateway.html) to the whole system (except `DShop.Services.Identity`for authentication).
 
@@ -106,6 +109,7 @@ You should be able to see new topics and queues available in the RabbitMQ manage
 **Where can I find the list of all Docker images being used?**
 ----------------
 
-You can find them in this repository under [/scripts/docker-images.txt](https://github.com/devmentors/DNC-DShop/blob/master/scripts/docker-images.txt) path.
+You can find them in this repository under listed in [docker-images.txt](https://github.com/devmentors/DNC-DShop/blob/master/scripts/docker-images.txt) file.
 
-Moreover, in this directory, you can also find [`git-clone-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-clone-all.sh), [`git-pull-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-pull-all.sh) or [`dotnet-build-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-build-all.sh) scripts that might be helpful for the repeating tatks.
+Moreover, in the `scripts` directory, you can find [git-clone-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-clone-all.sh), [git-pull-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-pull-all.sh), [dotnet-build-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-build-all.sh) or [dotnet-start-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-start-all.sh)
+scripts that might be helpful for the repeating tasks.
