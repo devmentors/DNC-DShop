@@ -5,7 +5,7 @@
 **What is Distributed .NET Core?**
 ----------------
 
-It's an open source project and free course available at [devmentors.io](https://devmentors.io), providing in-depth knowledge about building microservices using .NET Core framework and variety of tools. One of the goals, was to create a cloud agnostic solution, that you shall be able to run anywhere. 
+It's an open source project (and a course available soon at [devmentors.io](https://devmentors.io)), providing in-depth knowledge about building microservices using .NET Core framework and variety of tools. One of the goals, was to create a cloud agnostic solution, that you shall be able to run anywhere. 
 
 We encourage you to join our [Discourse](https://www.discourse.org) forum available at [forum.devmentors.io](https://forum.devmentors.io).
 
@@ -21,15 +21,16 @@ Just to name a few:
 - RESTful API implementation with ASP.NET Core
 - Domain Driven Design fundamentals
 - SQL and NoSQL databases (SQL Server, MongoDB)
-- Caching with Redis
+- Distributed caching with Redis
 - Communication via websockets using SignalR
 - CQRS, Commands & Events handlers
-- Using RabbitMQ as message queue
+- Using RabbitMQ as a message queue
+- Orchestrating messages and asynchronous requests
 - Process managers and Sagas
 - Internal HTTP communication with RestEase
 - Service discovery with Consul
 - Storing secrets with Vault
-- Monitoring with Grafana, Prometheus and InfluxDB
+- Monitoring with App Metrics, Grafana, Prometheus and InfluxDB
 - Logging with Seq and ELK stack
 - Building Docker images
 - Defining Docker compose stacks
@@ -97,7 +98,7 @@ services:
     ports:
       - '6379:6379'
 ```
-Once you have the core infrastructure available, you can start particular DNC project either by executing via `dotnet run` command in `/src/PROJECT_NAME/` directory or starting a shell script `./scripts/start.sh` from the root project directory. 
+Once you have the core infrastructure available, you can start a particular `DNC` project either by executing `dotnet run` command in `/src/PROJECT_NAME/` directory or starting a shell script `./scripts/start.sh` from the root project directory. 
 The order of starting the services has no meaning whatsoever - just keep in mind that `DShop.Api` acts as a [gateway](https://microservices.io/patterns/apigateway.html) to the whole system (except `DShop.Services.Identity`for authentication).
 
 You should be able to see new topics and queues available in the RabbitMQ management system, default UI is accessible at [http://localhost:15672](http://localhost:15672).
@@ -106,3 +107,5 @@ You should be able to see new topics and queues available in the RabbitMQ manage
 ----------------
 
 You can find them in this repository under [/scripts/docker-images.txt](https://github.com/devmentors/DNC-DShop/blob/master/scripts/docker-images.txt) path.
+
+Moreover, in this directory, you can also find [`git-clone-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-clone-all.sh), [`git-pull-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-pull-all.sh) or [`dotnet-build-all.sh`](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-build-all.sh) scripts that might be helpful for the repeating tatks.
