@@ -20,7 +20,7 @@ services:
     networks:
       - dshop
     volumes: 
-      - '/tmp/redis/:/data'
+      - /tmp/rabbitmq:/var/lib/rabbitmq'
 
   redis:
     image: redis
