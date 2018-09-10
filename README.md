@@ -109,7 +109,7 @@ You should be able to see new topics and queues available in the RabbitMQ manage
 **Where can I find the list of all Docker images being used?**
 ----------------
 
-You can find them in this repository under listed in [docker-images.txt](https://github.com/devmentors/DNC-DShop/blob/master/scripts/docker-images.txt) file.
+You can find them in this repository listed in [docker-images.txt](https://github.com/devmentors/DNC-DShop/blob/master/docker-images.txt) file.
 
 Moreover, in the `scripts` directory, you can find [git-clone-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-clone-all.sh), [git-pull-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-pull-all.sh), [dotnet-build-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-build-all.sh) or [dotnet-start-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-start-all.sh)
 scripts that might be helpful for the repeating tasks.
