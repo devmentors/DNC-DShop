@@ -64,6 +64,7 @@ services:
     networks:
       - dshop
     environment:
+      - 'CONSUL_ENABLED=false'
       - 'VAULT_ENABLED=false'
 
   products-service:

@@ -271,3 +271,5 @@ __pycache__/
 
 NuGet.config
 appsettings.local.json
+
+compose/mongo
