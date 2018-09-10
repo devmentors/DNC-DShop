@@ -1,12 +1,16 @@
 #!/bin/bash
-REPOSITORIES=(DNC-DShop.Api DNC-DShop.Common DNC-DShop.Services.Customers DNC-DShop.Services.Identity DNC-DShop.Services.Notifications DNC-DShop.Services.Operations DNC-DShop.Services.Orders DNC-DShop.Services.Products DNC-DShop.Services.Signalr)
+export ASPNETCORE_ENVIRONMENT=local
+BUILD=./scripts/dotnet-build.sh
+PREFIX=DNC-DShop
+SERVICE=$PREFIX.Services
+REPOSITORIES=($PREFIX.Api $PREFIX.Common $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
+
 for REPOSITORY in ${REPOSITORIES[*]}
 do
 	 echo ========================================================
-	 echo Building a solution: $REPOSITORY
+	 echo Building a project: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-     git checkout develop
-     dotnet build
+     $BUILD
      cd ..
 done

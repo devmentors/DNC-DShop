@@ -1,0 +1,87 @@
+version: "3.5"
+
+services:
+  api:
+    image: devmentors/dshop.api
+    ports:
+      - '5000:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  customers-service:
+    image: devmentors/dshop.services.customers
+    ports:
+      - '5001:5000'  
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  identity-service:
+    image: devmentors/dshop.services.identity
+    ports:
+      - '5002:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  notifications-service:
+    image: devmentors/dshop.services.notifications
+    ports:
+      - '5003:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  operations-service:
+    image: devmentors/dshop.services.operations
+    ports:
+      - '5004:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  orders-service:
+    image: devmentors/dshop.services.orders
+    ports:
+      - '5005:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  products-service:
+    image: devmentors/dshop.services.products
+    ports:
+      - '5006:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  signalr-service:
+    image: devmentors/dshop.services.signalr
+    ports:
+      - '5007:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+networks:
+  dshop:
+    name: dshop-network
+    external: true

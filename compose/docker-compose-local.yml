@@ -1,0 +1,94 @@
+version: "3.5"
+
+services:
+  api:
+    image: dshop.api:local
+    container_name: api
+    ports:
+      - '5000:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  customers-service:
+    image: dshop.services.customers:local
+    container_name: customers-service
+    ports:
+      - '5001:5000'  
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  identity-service:
+    image: dshop.services.identity:local
+    container_name: identity-service
+    ports:
+      - '5002:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  notifications-service:
+    image: dshop.services.notifications:local
+    container_name: notifications-service
+    ports:
+      - '5003:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  operations-service:
+    image: dshop.services.operations:local
+    container_name: operations-service
+    ports:
+      - '5004:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  orders-service:
+    image: dshop.services.orders:local
+    container_name: orders-service
+    ports:
+      - '5005:5000'
+    networks:
+      - dshop
+    environment:
+      - 'VAULT_ENABLED=false'
+
+  products-service:
+    image: dshop.services.products:local
+    container_name: products-service
+    ports:
+      - '5006:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+  signalr-service:
+    image: dshop.services.signalr:local
+    container_name: signalr-service
+    ports:
+      - '5007:5000'
+    networks:
+      - dshop
+    environment:
+      - 'CONSUL_ENABLED=false'
+      - 'VAULT_ENABLED=false'
+
+networks:
+  dshop:
+    name: dshop-network
+    external: true

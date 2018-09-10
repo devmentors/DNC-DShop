@@ -1,6 +1,6 @@
 #!/bin/bash
 export ASPNETCORE_ENVIRONMENT=local
-START_LOCAL=./scripts/dotnet-run.sh
+DOTNET_RUN=./scripts/dotnet-run.sh
 PREFIX=DNC-DShop
 SERVICE=$PREFIX.Services
 REPOSITORIES=($PREFIX.Api $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
@@ -11,6 +11,6 @@ do
 	 echo Starting a service: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-     $START_LOCAL &
+     $DOTNET_RUN &
      cd ..
 done

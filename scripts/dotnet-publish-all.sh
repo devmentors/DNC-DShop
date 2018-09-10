@@ -11,6 +11,6 @@ do
 	 echo Publishing a project: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-     $PUBLISH &
+     $PUBLISH
      cd ..
 done
