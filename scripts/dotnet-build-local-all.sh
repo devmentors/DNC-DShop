@@ -1,6 +1,6 @@
 #!/bin/bash
-export ASPNETCORE_ENVIRONMENT=docker
-BUILD=./scripts/dotnet-build.sh
+export ASPNETCORE_ENVIRONMENT=local
+BUILD=./scripts/dotnet-build-local.sh
 PREFIX=DNC-DShop
 SERVICE=$PREFIX.Services
 REPOSITORIES=($PREFIX.Api $PREFIX.Common $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
