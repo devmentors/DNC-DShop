@@ -36,7 +36,7 @@ Just to name a few:
 - Building [Docker](https://www.docker.com) images, managing containers, networks and [registries](https://hub.docker.com)
 - Defining [Docker compose](https://docs.docker.com/compose) stacks
 - Managing your own Nuget feeds (e.g. [MyGet](https://myget.org))
-- CI & CD with built services such as [Travis CI](https://travis-ci.org), [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) or [VSTS](https://visualstudio.microsoft.com/pl/team-services)
+- CI & CD with build services such as [Travis CI](https://travis-ci.org), [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) or [VSTS](https://visualstudio.microsoft.com/pl/team-services)
 - Deploying services to the Linux Servers and configuring [Nginx](https://www.nginx.com)
 - Orchestrating services on your VM or in the Cloud using [Portainer](https://portainer.io) or [Rancher](https://rancher.com) (built on top of [Kubernetes](https://kubernetes.io))
 
