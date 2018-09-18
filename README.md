@@ -22,6 +22,7 @@ Just to name a few:
 - Domain Driven Design fundamentals
 - SQL and NoSQL databases (SQL Server, MongoDB)
 - Distributed caching with Redis
+- JWT, authentication, authorization
 - Communication via websockets using SignalR
 - CQRS, Commands & Events handlers
 - Using RabbitMQ as a message queue

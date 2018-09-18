@@ -71,11 +71,13 @@ MONGO EXPRESS
 
 --- Docker ---
 
-docker run --name mongo-express -d -p 8081:8081 --link mongo:mongo mongo-express
+docker run --name mongo-express -d -p 8081:8081 mongo-express
 
 --- Optional ---
 
 -e ME_CONFIG_MONGODB_ADMINUSERNAME=user -e ME_CONFIG_MONGODB_ADMINPASSWORD=secret
+
+--network dshop-network
 
 
 ===========================================================================================================================
@@ -139,9 +141,11 @@ REDIS CLI
 
 --- Docker ---
 
-docker run -it --link redis:redis --rm redis redis-cli -h redis -p 6379
+docker run -it --rm redis redis-cli -h redis -p 6379
 
+--- Optional ---
 
+--network dshop-network
 
 ===========================================================================================================================
 *** SERVICE DISCOVERY ***
