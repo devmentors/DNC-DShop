@@ -127,3 +127,9 @@ You can find them in this repository listed in [docker-images.txt](https://githu
 
 Moreover, in the `scripts` directory, you can find [git-clone-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-clone-all.sh), [git-pull-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/git-pull-all.sh), [dotnet-build-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-build-all.sh) or [dotnet-run-all.sh](https://github.com/devmentors/DNC-DShop/blob/master/scripts/dotnet-run-all.sh)
 scripts that might be helpful for the repeating tasks.
+
+**What HTTP requests can be sent to the API?**
+----------------
+
+You can find the list of all HTTP requests in `DShop.rest` file placed in the root folder of [DShop.Api](https://github.com/devmentors/DNC-DShop.Api) repository ([here](https://github.com/devmentors/DNC-DShop.Api/blob/master/DShop.rest)). 
+This file is compatible with [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) plugin for [Visual Studio Code](https://code.visualstudio.com). 
