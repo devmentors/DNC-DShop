@@ -9,7 +9,7 @@ services:
     networks:
       - dshop
     volumes:
-      - './mongo:/data/db'
+      - /tmp/mongo:/data/db
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -20,7 +20,7 @@ services:
     networks:
       - dshop
     volumes: 
-      - /tmp/rabbitmq:/var/lib/rabbitmq'
+      - /tmp/rabbitmq:/var/lib/rabbitmq
 
   redis:
     image: redis
@@ -30,7 +30,7 @@ services:
     networks:
       - dshop
     volumes: 
-      - '/tmp/redis/:/data'
+      - /tmp/redis/:/data
 
 networks:
   dshop:
