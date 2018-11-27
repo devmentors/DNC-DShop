@@ -3,7 +3,7 @@ export ASPNETCORE_ENVIRONMENT=docker
 BUILD=./scripts/dotnet-build.sh
 PREFIX=DNC-DShop
 SERVICE=$PREFIX.Services
-REPOSITORIES=($PREFIX.Api $PREFIX.Common $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
+REPOSITORIES=($PREFIX.Api $PREFIX.Api.Next $PREFIX.Common $SERVICE.Customers $SERVICE.Identity $SERVICE.Notifications $SERVICE.Operations $SERVICE.Orders $SERVICE.Products $SERVICE.Signalr)
 
 for REPOSITORY in ${REPOSITORIES[*]}
 do
