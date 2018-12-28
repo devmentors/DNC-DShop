@@ -45,7 +45,7 @@ Just to name a few:
 
 Please clone the following repositories and put them into the same working directory:
 
-- [DNC-DShop](https://github.com/devmentors/DNC-DShop.Common)
+- [DNC-DShop](https://github.com/devmentors/DNC-DShop)
 - [DNC-DShop.Api](https://github.com/devmentors/DNC-DShop.Api)
 - [DNC-DShop.Common](https://github.com/devmentors/DNC-DShop.Common)
 - [DNC-DShop.Services.Identity](https://github.com/devmentors/DNC-DShop.Services.Identity)
