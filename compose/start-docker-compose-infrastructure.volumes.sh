@@ -1,0 +1,1 @@
+docker-compose -f docker-compose-infrastructure.volumes.yml up

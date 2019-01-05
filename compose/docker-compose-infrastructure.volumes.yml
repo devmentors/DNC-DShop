@@ -1,0 +1,41 @@
+version: "3.5"
+
+services:
+  mongo:
+    image: mongo:4
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - dshop
+    volumes:
+      - mongovol:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - dshop
+    volumes: 
+      - rabbitmqvol:/var/lib/rabbitmq
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - dshop
+    volumes: 
+      - redisvol:/data
+
+volumes:
+  mongovol:
+  rabbitmqvol:
+  redisvol:
+networks:
+  dshop:
+    name: dshop-network
