@@ -1,0 +1,49 @@
+version: "3.5"
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    networks:
+      - dshop
+    # network_mode: host
+    volumes:
+      - grafana:/var/lib/grafana
+
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    ports:
+      - '8086:8086'
+    networks:
+      - dshop
+    # network_mode: host
+    volumes:
+      - influxdb:/var/lib/influxdb
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    networks:
+      - dshop
+    # network_mode: host
+    volumes:
+      - prometheus:/prometheus
+      - ${PWD}/prometheus.yml:/etc/prometheus/prometheus.yml
+
+networks:
+  dshop:
+    name: dshop-network
+    external: true
+
+volumes:
+  grafana:
+    driver: local
+  influxdb:
+    driver: local
+  prometheus:
+    driver: local

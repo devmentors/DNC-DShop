@@ -5,33 +5,44 @@ services:
     image: mongo:4
     container_name: mongo
     ports:
-      - '27017:27017'
+      - 27017:27017
     networks:
       - dshop
+    # network_mode: host
     volumes:
-      - /tmp/mongo:/data/db
+      - mongo:/data/db
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - 5672:5672
+      - 15672:15672
     networks:
       - dshop
+    # network_mode: host
     volumes: 
-      - /tmp/rabbitmq:/var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
 
   redis:
     image: redis
     container_name: redis
     ports:
-      - '6379:6379'
+      - 6379:6379
     networks:
       - dshop
+    # network_mode: host
     volumes: 
-      - /tmp/redis/:/data
+      - redis:/data
 
 networks:
   dshop:
     name: dshop-network
+
+volumes:
+  mongo:
+    driver: local
+  rabbitmq:
+    driver: local
+  redis:
+    driver: local

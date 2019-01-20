@@ -1,0 +1,48 @@
+version: "3.5"
+
+services:
+  consul:
+    image: consul
+    container_name: consul
+    ports:
+      - 8500:8500
+    networks:
+      - dshop
+    # network_mode: host
+    volumes:
+      - consul:/consul/data
+
+  fabio:
+    image: fabiolb/fabio
+    container_name: fabio
+    environment:
+    - FABIO_REGISTRY_CONSUL_ADDR=consul:8500
+    networks:
+      - dshop
+    # network_mode: host
+    ports:
+    - 9998:9998
+    - 9999:9999
+
+  vault:
+    image: vault
+    container_name: vault
+    ports:
+      - 8200:8200
+    networks:
+      - dshop
+    # network_mode: host
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8200
+      - VAULT_DEV_ROOT_TOKEN_ID=secret
+    cap_add:
+      - IPC_LOCK
+
+networks:
+  dshop:
+    name: dshop-network
+    external: true
+
+volumes:
+  consul:
+    driver: local
