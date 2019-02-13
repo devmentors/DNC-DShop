@@ -1,5 +1,5 @@
 #!/bin/bash
-REPOSITORIES=(DNC-DShop DNC-DShop.Api DNC-DShop.Api.Next DNC-DShop.Common DNC-DShop.Services.Customers DNC-DShop.Services.Identity DNC-DShop.Services.Notifications DNC-DShop.Services.Operations DNC-DShop.Services.Orders DNC-DShop.Services.Products DNC-DShop.Services.Signalr)
+REPOSITORIES=(DNC-DShop DNC-DShop.Api DNC-DShop.Api.Next DNC-DShop.Common DNC-DShop.Services.Customers DNC-DShop.Services.Discounts DNC-DShop.Services.Identity DNC-DShop.Services.Notifications DNC-DShop.Services.Operations DNC-DShop.Services.Orders DNC-DShop.Services.Products DNC-DShop.Services.Signalr)
 
 if [ "$1" = "-p" ]
   then
