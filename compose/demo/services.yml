@@ -1,0 +1,71 @@
+version: "3.5"
+
+services:
+  api:
+    image: devmentors/dshop.api
+    container_name: api
+    ports:
+      - 5000:5000
+    networks:
+      - dshop
+
+  customers-service:
+    image: devmentors/dshop.services.customers
+    container_name: customers-service
+    ports:
+      - 5001:5000 
+    networks:
+      - dshop
+
+  identity-service:
+    image: devmentors/dshop.services.identity
+    container_name: identity-service
+    ports:
+      - 5002:5000
+    networks:
+      - dshop
+
+  notifications-service:
+    image: devmentors/dshop.services.notifications
+    container_name: notifications-service
+    ports:
+      - 5003:5000
+    networks:
+      - dshop
+
+  operations-service:
+    image: devmentors/dshop.services.operations
+    container_name: operations-service
+    ports:
+      - 5004:5000
+    networks:
+      - dshop
+
+  orders-service:
+    image: devmentors/dshop.services.orders
+    container_name: orders-service
+    ports:
+      - 5005:5000
+    networks:
+      - dshop
+
+  products-service:
+    image: devmentors/dshop.services.products
+    container_name: products-service
+    ports:
+      - 5006:5000
+    networks:
+      - dshop
+
+  signalr-service:
+    image: devmentors/dshop.services.signalr
+    container_name: signalr-service
+    ports:
+      - 5007:5000
+    networks:
+      - dshop
+
+networks:
+  dshop:
+    name: dshop-network
+    external: true
