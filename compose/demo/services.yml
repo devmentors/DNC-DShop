@@ -4,6 +4,7 @@ services:
   api:
     image: devmentors/dshop.api
     container_name: api
+    restart: always
     ports:
       - 5000:5000
     networks:
@@ -12,6 +13,7 @@ services:
   customers-service:
     image: devmentors/dshop.services.customers
     container_name: customers-service
+    restart: always
     ports:
       - 5001:5000 
     networks:
@@ -20,6 +22,7 @@ services:
   identity-service:
     image: devmentors/dshop.services.identity
     container_name: identity-service
+    restart: always
     ports:
       - 5002:5000
     networks:
@@ -28,6 +31,7 @@ services:
   notifications-service:
     image: devmentors/dshop.services.notifications
     container_name: notifications-service
+    restart: always
     ports:
       - 5003:5000
     networks:
@@ -36,6 +40,7 @@ services:
   operations-service:
     image: devmentors/dshop.services.operations
     container_name: operations-service
+    restart: always
     ports:
       - 5004:5000
     networks:
@@ -44,6 +49,7 @@ services:
   orders-service:
     image: devmentors/dshop.services.orders
     container_name: orders-service
+    restart: always
     ports:
       - 5005:5000
     networks:
@@ -52,6 +58,7 @@ services:
   products-service:
     image: devmentors/dshop.services.products
     container_name: products-service
+    restart: always
     ports:
       - 5006:5000
     networks:
@@ -60,6 +67,7 @@ services:
   signalr-service:
     image: devmentors/dshop.services.signalr
     container_name: signalr-service
+    restart: always
     ports:
       - 5007:5000
     networks:

@@ -4,6 +4,7 @@ services:
   consul:
     image: consul
     container_name: consul
+    restart: always
     ports:
       - 8500:8500
     networks:
@@ -15,6 +16,7 @@ services:
   fabio:
     image: fabiolb/fabio
     container_name: fabio
+    restart: always
     environment:
     - FABIO_REGISTRY_CONSUL_ADDR=consul:8500
     networks:
@@ -27,6 +29,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    restart: always
     ports:
       - 3000:3000
     networks:
@@ -35,9 +38,22 @@ services:
     volumes:
       - grafana:/var/lib/grafana
 
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - dshop
+    # network_mode: host
+    volumes:
+      - influxdb:/var/lib/influxdb
+
   jaeger:
     image: jaegertracing/all-in-one
     container_name: jaeger
+    restart: always
     ports:
       - 5775:5775/udp
       - 5778:5778
@@ -53,6 +69,7 @@ services:
   mongo:
     image: mongo
     container_name: mongo
+    restart: always
     ports:
       - 27017:27017
     networks:
@@ -64,6 +81,7 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
+    restart: always
     ports:
       - '9090:9090'
     networks:
@@ -76,6 +94,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
+    restart: always
     ports:
       - 5672:5672
       - 15672:15672
@@ -88,6 +107,7 @@ services:
   redis:
     image: redis
     container_name: redis
+    restart: always
     ports:
       - 6379:6379
     networks:
@@ -99,6 +119,7 @@ services:
   seq:
     image: datalust/seq 
     container_name: seq
+    restart: always
     environment:
       - ACCEPT_EULA=Y
     ports:
@@ -112,6 +133,7 @@ services:
   vault:
     image: vault
     container_name: vault
+    restart: always
     ports:
       - 8200:8200
     networks:
@@ -131,6 +153,8 @@ volumes:
   consul:
     driver: local
   grafana:
+    driver: local
+  influxdb:
     driver: local
   mongo:
     driver: local
